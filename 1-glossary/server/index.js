@@ -5,17 +5,14 @@ const Entry = require('./db');
 
 const app = express();
 
-// Serves up all static and generated assets in in a specified folder.
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
-// app.use(express.urlencoded())
 
 app.get('/api/entries', (req, res) => {
   Entry.getAll((error, result) => {
     if (error) {
       res.status(400).send(error.message);
     } else {
-      console.log(typeof result[0]._id)
       res.send(result);
     }
   });

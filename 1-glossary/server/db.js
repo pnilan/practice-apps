@@ -14,10 +14,10 @@ const Entry = mongoose.model('Entry', {
 });
 
 module.exports = {
-  create: (data, callback) => {
 
+  create: (data, callback) => {
     const entry = new Entry({
-      term: data.term,
+      term: data.term.toLowerCase(),
       definition: data.definition
     });
 
@@ -28,6 +28,7 @@ module.exports = {
 
   getAll: (callback) => {
     Entry.find({})
+      .sort({ term: 1 })
       .then((res) => callback(null, res))
       .catch((err) => callback(err));
   },
@@ -43,4 +44,5 @@ module.exports = {
       .then((res) => callback(null, res))
       .catch((err) => callback(err));
   }
+
 };
