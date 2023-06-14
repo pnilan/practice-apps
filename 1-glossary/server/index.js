@@ -39,16 +39,23 @@ app.put('/api/entries/:id', (req, res) => {
 
   Entry.update(id, data, (error, result) => {
     if (error) {
-      console.log(error.message);
       res.status(400).send(error.message);
     } else {
-      res.status(200).end('Updated record successfully.');
+      res.status(200).send('Updated record successfully.');
     }
   })
 });
 
 app.delete('/api/entries/:id', (req, res) => {
+  var id = req.params.id;
 
+  Entry.delete(id, (error, result) => {
+    if (error) {
+      res.status(400).send(error.message);
+    } else {
+      res.status(200).end();
+    }
+  })
 });
 
 

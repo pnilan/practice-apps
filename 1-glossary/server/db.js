@@ -39,6 +39,8 @@ module.exports = {
   },
 
   delete: (id, callback) => {
-
+    Entry.findOneAndRemove({ _id: id })
+      .then((res) => callback(null, res))
+      .catch((err) => callback(err));
   }
 };
