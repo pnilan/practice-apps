@@ -32,8 +32,10 @@ module.exports = {
       .catch((err) => callback(err));
   },
 
-  update: (id, callback) => {
-
+  update: (id, data, callback) => {
+    Entry.updateOne({ _id: id }, { term: data.term, definition: data.definition })
+      .then((res) => callback(null, res))
+      .catch((err) => callback(err));
   },
 
   delete: (id, callback) => {

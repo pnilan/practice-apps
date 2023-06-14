@@ -15,6 +15,7 @@ app.get('/api/entries', (req, res) => {
     if (error) {
       res.status(400).send(error.message);
     } else {
+      console.log(typeof result[0]._id)
       res.send(result);
     }
   });
@@ -33,7 +34,17 @@ app.post('/api/entries', (req, res) => {
 });
 
 app.put('/api/entries/:id', (req, res) => {
+  var id = req.params.id;
+  var data = req.body;
 
+  Entry.update(id, data, (error, result) => {
+    if (error) {
+      console.log(error.message);
+      res.status(400).send(error.message);
+    } else {
+      res.status(200).end('Updated record successfully.');
+    }
+  })
 });
 
 app.delete('/api/entries/:id', (req, res) => {
