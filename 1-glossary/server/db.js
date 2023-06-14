@@ -4,3 +4,37 @@ const mongoose = require("mongoose");
 // 2. Set up any schema and models needed by the app
 // 3. Export the models
 // 4. Import the models into any modules that need them
+
+mongoose.connect('mongodb://127.0.0.1:27017/glossary');
+
+const Entry = mongoose.model('Entry', {
+  term: { type: String, unique: true, required: true },
+  definition: { type: String, required: true },
+  created_at: { type: Date, default: Date.now }
+});
+
+module.exports = {
+  create: (data, callback) => {
+
+    const entry = new Entry({
+      term: data.term,
+      definition: data.definition
+    });
+
+    entry.save()
+      .then((res) => callback(null, res))
+      .catch((err) => callback(err))
+  },
+
+  getAll: (callback) => {
+
+  },
+
+  update: (id, callback) => {
+
+  },
+
+  delete: (id, callback) => {
+
+  }
+};
