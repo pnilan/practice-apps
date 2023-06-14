@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 // Serves up all static and generated assets in in a specified folder.
-app.use(express.static(path.join(__dirname, /* FILL ME IN */)));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 /****
  *
