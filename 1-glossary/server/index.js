@@ -11,7 +11,13 @@ app.use(express.json());
 // app.use(express.urlencoded())
 
 app.get('/api/entries', (req, res) => {
-
+  Entry.getAll((error, result) => {
+    if (error) {
+      res.status(400).send(error.message);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.post('/api/entries', (req, res) => {

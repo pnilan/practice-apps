@@ -27,7 +27,9 @@ module.exports = {
   },
 
   getAll: (callback) => {
-
+    Entry.find({})
+      .then((res) => callback(null, res))
+      .catch((err) => callback(err));
   },
 
   update: (id, callback) => {
