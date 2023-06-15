@@ -17,8 +17,8 @@ const GlossaryEntry = ({entry, i, get, remove}) => {
     }
 
     axios.put(`/api/entries/${id}`, {
-      term: updateTermInput,
-      definition: updateDefinitionInput
+      term: term,
+      definition: definition
     })
       .then(() => {
         setToggle(false);
@@ -45,7 +45,7 @@ const GlossaryEntry = ({entry, i, get, remove}) => {
 
   return (
     <div className={i % 2 === 0 ? 'row dark' : 'row light'}>
-      <div className="col-auto">
+      <div className="col-2">
         { toggle ? (
           <input type='text' className="form-control" value={updateTermInput} onChange={(e) => handleChange(e, setUpdateTermInput)}></input>
         ) : (
@@ -67,7 +67,11 @@ const GlossaryEntry = ({entry, i, get, remove}) => {
         )}
       </div>
       <div className="col-auto">
-        <button type="button" className="btn-close" onClick={() => remove(entry._id)} />
+        { toggle ? (
+          <></>
+        ) : (
+          <button type="button" className="btn-close" onClick={() => remove(entry._id)} />
+        )}
       </div>
     </div>
   );
