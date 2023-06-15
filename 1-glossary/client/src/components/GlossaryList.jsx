@@ -5,11 +5,6 @@ import GlossaryEntry from './GlossaryEntry.jsx';
 
 const GlossaryList = ({entries, get}) => {
 
-
-  const update = (id, data) => {
-
-  };
-
   const remove = (id) => {
     axios({
       method: 'delete',
@@ -22,7 +17,7 @@ const GlossaryList = ({entries, get}) => {
 
   return (
     <div className="mt-4">
-      {entries.map((entry, i) => <GlossaryEntry key={entry._id} entry={entry} i={i} update={update} remove={remove} />)}
+      {entries.map((entry, i) => <GlossaryEntry key={entry._id} entry={entry} i={i} get={get} remove={remove} />)}
     </div>
   );
 };
