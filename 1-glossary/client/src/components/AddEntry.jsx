@@ -22,11 +22,11 @@ const AddEntry = ({post}) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="termInput">Term:</label>
-            <input type="text" className="form-control" value={termInput} name="termInput" onChange={(e) => handleChange(e, setTermInput)} />
+            <input type="text" className="form-control" value={termInput} name="termInput" onChange={(e) => handleChange(e, setTermInput)} required/>
           </div>
           <div className="form-group mb-2">
             <label htmlFor="definitionInput">Definition:</label>
-            <textarea className="form-control" value={definitionInput} rows={3} name="definitionInput" onChange={(e) => handleChange(e, setDefinitionInput)} />
+            <textarea className="form-control" value={definitionInput} rows={3} name="definitionInput" onChange={(e) => handleChange(e, setDefinitionInput)} required/>
           </div>
           <button type="submit" className="btn btn-primary">Add Term</button>
         </form>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import TextareaAutosize from 'react-textarea-autosize';
+import ReactMarkdown from 'react-markdown';
 
 const GlossaryEntry = ({entry, i, get, remove}) => {
 
@@ -8,31 +9,40 @@ const GlossaryEntry = ({entry, i, get, remove}) => {
   const [updateTermInput, setUpdateTermInput] = useState(entry.term);
   const [updateDefinitionInput, setUpdateDefinitionInput] = useState(entry.definition);
 
+  var term = entry.term[0].toUpperCase() + entry.term.slice(1);
+
   const update = (id, term, definition) => {
     term = term.toLowerCase().trim();
     definition = definition.trim();
 
-    if (entry.term === term && entry.defintion === definition) {
+    if (entry.term === term && entry.definition === definition) {
       setToggle(false);
+    } else {
+      axios.put(`/api/entries/${id}`, {
+        term: term,
+        definition: definition
+      })
+        .then(() => {
+          setToggle(false);
+          setTimeout(() => {
+            get('/api/entries')
+          }, 200);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
     }
 
-    axios.put(`/api/entries/${id}`, {
-      term: term,
-      definition: definition
-    })
-      .then(() => {
-        setToggle(false);
-        setTimeout(() => {
-          get('/api/entries')
-        }, 200);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
   };
 
   const handleEdit = () => {
     setToggle(!toggle);
+  };
+
+  const handleCancel = () => {
+    setToggle(!toggle);
+    setUpdateTermInput(term);
+    setUpdateDefinitionInput(entry.definition);
   };
 
   const handleClick = () => {
@@ -49,14 +59,14 @@ const GlossaryEntry = ({entry, i, get, remove}) => {
         { toggle ? (
           <input type='text' className="form-control" value={updateTermInput} onChange={(e) => handleChange(e, setUpdateTermInput)}></input>
         ) : (
-          <h5>{entry.term}</h5>
+          <h5>{term}</h5>
         )}
       </div>
-      <div className="col">
+      <div className="col definition-container">
         { toggle ? (
-          <TextareaAutosize type='text' className="form-control" value={updateDefinitionInput} onChange={(e) => handleChange(e, setUpdateDefinitionInput)} />
+          <TextareaAutosize type='text' className="form-control" value={updateDefinitionInput} onChange={(e) => handleChange(e, setUpdateDefinitionInput)} autoFocus={true}/>
         ) : (
-          <p>{entry.definition}</p>
+            <ReactMarkdown>{entry.definition}</ReactMarkdown>
         )}
       </div>
       <div className="col-1">
@@ -68,7 +78,7 @@ const GlossaryEntry = ({entry, i, get, remove}) => {
       </div>
       <div className="col-auto">
         { toggle ? (
-          <></>
+          <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancel</button>
         ) : (
           <button type="button" className="btn-close" onClick={() => remove(entry._id)} />
         )}

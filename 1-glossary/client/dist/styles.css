@@ -53,8 +53,17 @@ h6 {
   overflow-wrap: break-word;
 }
 
+h5 {
+  margin-bottom: 0 !important;
+}
+
+ul {
+  padding-top: 1rem !important;
+}
+
+
 p {
-  padding-top: 10px;
+  padding-top: 1rem;
 }
 
 main {
@@ -74,3 +83,9 @@ main {
 .row {
   align-items: center;
 }
+
+.page {
+  text-align: center;
+  color: dimgray;
+}
+
