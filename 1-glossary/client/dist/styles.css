@@ -53,6 +53,10 @@ h6 {
   overflow-wrap: break-word;
 }
 
+p {
+  padding-top: 10px;
+}
+
 main {
   max-width: 840px;
   padding: 16px;
@@ -65,4 +69,8 @@ main {
 
 .dark {
   background-color: aliceblue;
+}
+
+.row {
+  align-items: center;
 }
