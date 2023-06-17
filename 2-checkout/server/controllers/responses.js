@@ -1,4 +1,4 @@
-const { getOne, create, update } = require('../models/responses');
+const { getOne, create, updateShipping, updateBilling, updatePurchase } = require('../models/responses');
 
 module.exports = {
 
@@ -8,8 +8,8 @@ module.exports = {
         console.log(error);
         res.status(400).end();
       } else {
-        console.log(result);
-        res.json(result[0]);
+        console.log(result[0]);
+        res.send(result[0]);
       }
     });
 
@@ -32,17 +32,35 @@ module.exports = {
   put: (req, res) => {
 
     var data = req.body;
-    var properties = Object.keys(data);
+    var session_id = req.session_id;
 
-    update(req.session_id, properties, data, (error, result) => {
-      if (error) {
-        console.log(error);
-        res.status(400).end();
-      } else {
-        res.status(200).end();
-      }
-
-    })
+    if (data.stage === 3) {
+      updateShipping(session_id, data, (error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(400).end();
+        } else {
+          res.status(200).end();
+        }
+      })
+    } else if (data.stage === 4) {
+      updateBilling(session_id, data, (error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(400).end();
+        } else {
+          res.status(200).end();
+        }
+      })
+    } else {
+      updatePurchase(session_id, data, (error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(400).end();
+        } else {
+          res.status(200).end();
+        }
+      })
+    }
   }
-
 };

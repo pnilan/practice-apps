@@ -33,7 +33,7 @@ db.connectAsync()
         shipping_city VARCHAR(100),
         shipping_state VARCHAR(2),
         shipping_zip INT,
-        billing_cc INT,
+        billing_cc VARCHAR(100),
         billing_exp_month INT,
         billing_exp_year INT,
         billing_cvv INT,
