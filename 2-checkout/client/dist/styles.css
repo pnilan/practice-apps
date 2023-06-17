@@ -1,10 +1,10 @@
 /**
- * 
+ *
  * Based on Josh Comeau's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/.
- * 
+ *
  * Feel free to edit this file as needed.
- * 
- */ 
+ *
+ */
 
 *,
 *::before,
@@ -32,6 +32,8 @@ picture,
 video,
 canvas,
 svg {
+
+}
   display: block;
   max-width: 100%;
 }
@@ -57,4 +59,36 @@ main {
   max-width: 840px;
   padding: 16px;
   margin: auto;
+}
+
+.popup {
+  margin-top: 100px;
+  height: 500px;
+  max-width: 800px;
+}
+
+.product {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 100px;
+}
+
+.checkout {
+  margin-top: 30px;
+  text-align: center;
+  height: 50%;
+  align-items: center;
+}
+
+.button-container {
+  margin-top: 30px;
+  text-align: center;
+  height: 50%;
+  align-items: center;
+}
+
+.btn {
+  width: 150px;
+  height: 50px;
+  font-size: x-large;
 }
