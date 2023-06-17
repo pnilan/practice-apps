@@ -4,7 +4,6 @@ const path = require("path");
 const sessionHandler = require("./middleware/session-handler");
 const logger = require("./middleware/logger");
 const routes = require('./routes');
-const responses = require('./controllers/responses');
 
 // Establishes connection to the database on server start
 const db = require("./db");
@@ -22,8 +21,6 @@ app.use(logger);
 
 // Serves up all static and generated assets in a specified folder.
 app.use(express.static(path.join(__dirname, '../client/dist')));
-
-// app.use('/', responses.get);
 
 app.use('/api', routes);
 
