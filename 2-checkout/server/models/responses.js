@@ -9,7 +9,7 @@ const query = (string, args, cb) => {
 module.exports = {
 
   getOne: (sessionId, callback) => {
-    var queryString = `SELECT * FROM responses`;
+    var queryString = `SELECT * FROM responses WHERE session_id = ?`;
     var queryArgs = [sessionId];
     query(queryString, queryArgs, callback);
   },
